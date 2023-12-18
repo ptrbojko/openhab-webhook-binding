@@ -65,6 +65,7 @@
 		<label>Trigger channel</label>
 		<description>Trigger channel for incoming webhook requests.</description>
 		<state readOnly="true"/>
+		<event />
 		<config-description-ref uri="channel-type:webhook:channel-config"/>
 	</channel-type>
 
