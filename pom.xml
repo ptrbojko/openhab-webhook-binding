@@ -213,6 +213,48 @@
         </executions>
       </plugin>
 
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.6.0</version>
+        <executions>
+          <execution>
+            <id>embed-dependencies</id>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <configuration>
+              <includeScope>runtime</includeScope>
+              <includeTypes>jar</includeTypes>
+              <excludes>**/module-info.class</excludes>
+              <excludeGroupIds>javax.activation,org.apache.karaf.features,org.lastnpe.eea</excludeGroupIds>
+              <excludeArtifactIds>${dep.noembedding}</excludeArtifactIds>
+              <outputDirectory>${project.build.directory}/classes</outputDirectory>
+              <overWriteReleases>true</overWriteReleases>
+              <overWriteSnapshots>true</overWriteSnapshots>
+              <excludeTransitive>true</excludeTransitive>
+              <type>jar</type>
+            </configuration>
+          </execution>
+          <execution>
+            <id>unpack-eea</id>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>org.lastnpe.eea</groupId>
+                  <artifactId>eea-all</artifactId>
+                  <version>${eea.version}</version>
+                  <overWrite>true</overWrite>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
     </plugins>
   </build>
 
